@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        header {
+            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: left;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        table {
+            margin: auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        .brown-button {
+            background-color: brown;
+            color: white;
+        }
+
+        .grey-button {
+            background-color: grey;
+            color: white;
+        }
+
+        .white-button {
+            background-color: white;
+            color: black;
+            border: 1px solid black;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #passport-image {
+            float: left;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Personal Information</h1>
+    </header>
+    <div id="passport-image">
+        <img src="DSC.jpg" alt="My Picture" style="width:150px;height:150px;border-radius: 50%;">
+    </div>
+    <h1>Here is the Local Storage Demo!</h1>
+    <table style="width:50%;margin:auto;">
+        <tr>
+            <td>Name:</td>
+            <td>Brian Kiogora</td>
+        </tr>
+        <tr>
+            <td>Registration Number:</td>
+            <td>Sct222-0184/2021</td>
+        </tr>
+    </table>
+    <p>Click the buttons below to set your favourite background color:</p>
+    <button class="brown-button" type="button" onclick="setColorPreference('brown')">Brown</button>
+    <button class="grey-button" type="button" onclick="setColorPreference('grey')">Grey</button>
+    <button class="white-button" type="button" onclick="setColorPreference('white')">White</button>
+</body>
+
+<script>
+    const localStorage = window.localStorage;
+
+    const updateDOM = () => {
+        const storedPreferences = localStorage.getItem("preference");
+        const preference = storedPreferences ? JSON.parse(storedPreferences) : {};
+        document.body.style.background = preference.color || "white";
+    };
+
+    const setColorPreference = (color) => {
+        const preference = {
+            color
+        };
+        localStorage.setItem("preference", JSON.stringify(preference));
+        updateDOM();
+    };
+</script>
+
+</html>
